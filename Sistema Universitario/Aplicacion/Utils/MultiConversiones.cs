@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaUniversitario.Aplicacion.Utilidades
+namespace Sistema_Universitario.Aplicacion.Utils
 {
     /// <summary>
     /// Clase que contiene métodos de conversión de tipos, 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SistemaUniversitario.Aplicacion.GenDatos;
+using Sistema_Universitario.Aplicacion;
+using Sistema_Universitario.Aplicacion.Utils;
 using SistemaUniversitario.Dominio.Entidades;
 using SistemaUniversitario.Dominio.Enums;
+
 
 namespace SistemaUniversitario.Aplicacion.GenDatos
 {
@@ -64,7 +66,7 @@ namespace SistemaUniversitario.Aplicacion.GenDatos
             for (int i = 0; i < 15; i++)
             {
                 var estudiante = new Estudiante(
-                    $"E{(i + 1):D3}",
+                    $"E{i + 1:D3}",
                     nombres[i],
                     apellidos[i],
                     new DateTime(2000 + random.Next(0, 5), random.Next(1, 13), random.Next(1, 28)),

@@ -1,8 +1,11 @@
-﻿using Sistema_Universitario.Dominio.Entidades.Interfaces;
-using Sistema_Universitario.Dominio.Interfaces;
+﻿using Sistema_Universitario.Dominio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SistemaUniversitario.Dominio.Entidades;
+using SistemaUniversitario.Dominio.Enums;
+
+
 
 namespace SistemaUniversitario.Dominio.Entidades
 {

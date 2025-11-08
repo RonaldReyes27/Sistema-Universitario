@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sistema_Universitario.Dominio.Interfaces;
 
-namespace SistemaUniversitario.Aplicacion
+namespace Sistema_Universitario.Aplicacion
 {
     /// <summary>
     /// Repositorio genérico para gestionar entidades que implementen IIdentificable.

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using SistemaUniversitario.Presentation;
+using SistemaUniversitario.Presentacion;   // <-- en español: Presentacion
 
 namespace SistemaUniversitario
 {
@@ -10,10 +10,9 @@ namespace SistemaUniversitario
         {
             try
             {
-                // Soporte de caracteres (acentos, líneas, etc.)
                 Console.OutputEncoding = Encoding.UTF8;
 
-                // Punto de entrada a la app de consola
+                // Clase que vive en el namespace SistemaUniversitario.Presentacion
                 var sistema = new SistemaUniversitarioApp();
                 sistema.Ejecutar();
             }

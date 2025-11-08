@@ -1,7 +1,12 @@
-﻿using SistemaUniversitario.Aplicacion;
+﻿using Sistema_Universitario.Aplicacion;
+using SistemaUniversitario.Aplicacion;
 using SistemaUniversitario.Aplicacion.GenDatos;
 using SistemaUniversitario.Dominio.Entidades;
 using SistemaUniversitario.Dominio.Enums;
+using SistemaUniversitario.Estructura;
+// Si usas reflection:
+
+
 using System;
 using System.Linq;
 
@@ -12,6 +17,7 @@ namespace SistemaUniversitario.Presentacion
         private readonly Repositorio<Estudiante> repoEstudiantes = new();
         private readonly Repositorio<Profesor> repoProfesores = new();
         private readonly Repositorio<Curso> repoCursos = new();
+
         private readonly GestorMatriculas gestorMatriculas = new();
         private readonly GeneradorDatos generadorDatos = new();
 
@@ -412,7 +418,8 @@ namespace SistemaUniversitario.Presentacion
         private void AnalizarConReflection()
         {
             MarcoTitulo("ANÁLISIS CON REFLECTION", ConsoleColor.Magenta);
-            var analizador = new Infrastructure.AnalizadorReflection();
+            var analizador = new AnalizadorReflection();
+
 
             Console.WriteLine("\n1. Analizar Estudiante\n2. Analizar Profesor\n3. Analizar Curso");
             Console.Write("\nOpción: ");

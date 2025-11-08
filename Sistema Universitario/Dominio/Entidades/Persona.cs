@@ -1,6 +1,12 @@
 ﻿using System;
 using Sistema_Universitario.Dominio.Interfaces;
 using SistemaUniversitario.Aplicacion.Validacion;
+using SistemaUniversitario.Dominio.Entidades;
+using SistemaUniversitario.Dominio.Enums;
+
+
+
+
 
 namespace SistemaUniversitario.Dominio.Entidades
 {

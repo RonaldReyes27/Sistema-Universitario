@@ -1,7 +1,11 @@
-﻿using Sistema_Universitario.Dominio.Entidades.Enums;
+﻿using System;
 using SistemaUniversitario.Aplicacion.Validacion;
-using SistemaUniversitario.Dominio.Entidades; // Mantienes la carpeta "Enums" en inglés
+using SistemaUniversitario.Dominio.Enums;
 using System;
+using SistemaUniversitario.Dominio.Entidades;
+using SistemaUniversitario.Dominio.Enums;
+
+
 
 namespace SistemaUniversitario.Dominio.Entidades
 {
