@@ -3,18 +3,15 @@ using SistemaUniversitario.Aplicacion.Validacion;
 using SistemaUniversitario.Dominio.Entidades;
 using SistemaUniversitario.Dominio.Enums;
 
-
-
-
-
 namespace SistemaUniversitario.Dominio.Entidades
 {
-    /// <summary>
+    
     /// Representa a un estudiante dentro del sistema universitario.
     /// Hereda de Persona e incluye información académica adicional.
-    /// </summary>
+    
     public class Estudiante : Persona
     {
+        // Campos privados
         private string carrera = "";
         private string numeroMatricula = "";
 

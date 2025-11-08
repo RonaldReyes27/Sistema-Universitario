@@ -9,10 +9,10 @@ using SistemaUniversitario.Dominio.Enums;
 
 namespace SistemaUniversitario.Dominio.Entidades
 {
-    /// <summary>
+   
     /// Representa una matrícula entre un estudiante y un curso.
     /// Permite registrar calificaciones, calcular promedios y estado académico.
-    /// </summary>
+    
     public class Matricula : IEvaluable
     {
         public Estudiante Estudiante { get; set; }

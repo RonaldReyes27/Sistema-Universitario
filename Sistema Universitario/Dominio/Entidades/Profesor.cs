@@ -9,10 +9,10 @@ using SistemaUniversitario.Dominio.Enums;
 
 namespace SistemaUniversitario.Dominio.Entidades
 {
-    /// <summary>
+   
     /// Representa a un profesor dentro del sistema universitario.
     /// Hereda de Persona e incluye datos laborales como salario y tipo de contrato.
-    /// </summary>
+  
     public class Profesor : Persona
     {
         private string departamento = "";

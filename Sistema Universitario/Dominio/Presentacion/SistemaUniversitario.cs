@@ -3,6 +3,7 @@ using SistemaUniversitario.Aplicacion;
 using SistemaUniversitario.Aplicacion.GenDatos;
 using SistemaUniversitario.Dominio.Entidades;
 using SistemaUniversitario.Dominio.Enums;
+using Sistema_Universitario.Aplicacion.Utils;
 using SistemaUniversitario.Estructura;
 // Si usas reflection:
 
@@ -17,18 +18,37 @@ namespace SistemaUniversitario.Presentacion
         private readonly Repositorio<Estudiante> repoEstudiantes = new();
         private readonly Repositorio<Profesor> repoProfesores = new();
         private readonly Repositorio<Curso> repoCursos = new();
-
         private readonly GestorMatriculas gestorMatriculas = new();
         private readonly GeneradorDatos generadorDatos = new();
 
         public void Ejecutar()
         {
+            // Título
             MostrarBienvenida();
 
-            Console.Write("\n¿Desea cargar datos de prueba? (S/N): ");
-            if ((Console.ReadLine() ?? "").Trim().ToUpper() == "S")
-                generadorDatos.GenerarDatosPrueba(repoEstudiantes, repoProfesores, repoCursos, gestorMatriculas);
+            // Pregunta por datos de prueba (una sola tecla; no requiere ENTER)
+            Console.WriteLine();
+            bool cargarPrueba = ConfirmarSN("¿Desea cargar datos de prueba? (S/N): ");
 
+            if (cargarPrueba)
+            {
+                MostrarExito("Cargando datos de prueba...");
+                generadorDatos.GenerarDatosPrueba(repoEstudiantes, repoProfesores, repoCursos, gestorMatriculas);
+                MostrarExito("Datos de prueba cargados.\n");
+
+                // 👇 Mostrar inmediatamente un resumen de los datos generados
+                MostrarDatosPruebaGenerados();
+
+                Console.WriteLine("\nPresione cualquier tecla para ir al menú...");
+                Console.ReadKey();
+            }
+            else
+            {
+                MostrarWarn("No se cargaron datos de prueba.");
+            }
+
+
+            // ===== Bucle principal =====
             bool salir = false;
             while (!salir)
             {
@@ -63,6 +83,78 @@ namespace SistemaUniversitario.Presentacion
                 }
             }
         }
+        // Lee una sola tecla S/N sin necesidad de presionar ENTER
+        private static bool ConfirmarSN(string mensaje)
+        {
+            Console.Write(mensaje);
+            while (true)
+            {
+                var key = Console.ReadKey(intercept: true);
+                if (key.Key == ConsoleKey.S || key.Key == ConsoleKey.Y) { Console.WriteLine("S"); return true; } // S (o Y en teclado inglés)
+                if (key.Key == ConsoleKey.N) { Console.WriteLine("N"); return false; }
+                // cualquier otra tecla se ignora
+            }
+        }
+        // Muestra resumen legible de profesores, cursos, estudiantes y estadísticas
+        private void MostrarDatosPruebaGenerados()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n================ DATOS DE PRUEBA GENERADOS ================\n");
+            Console.ResetColor();
+
+            // Profesores
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("PROFESORES");
+            Console.ResetColor();
+
+            var profs = repoProfesores.ObtenerTodos();
+            if (profs.Count == 0) Console.WriteLine("  (sin profesores)");
+            foreach (var p in profs)
+                Console.WriteLine($"  {p.Identificacion}  {p.Nombre} {p.Apellido}  | {p.Departamento}  | {p.TipoContrato}  | ${p.SalarioBase:N2}");
+
+            // Cursos
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nCURSOS");
+            Console.ResetColor();
+
+            var cursos = repoCursos.ObtenerTodos();
+            if (cursos.Count == 0) Console.WriteLine("  (sin cursos)");
+            foreach (var c in cursos)
+            {
+                var prof = c.ProfesorAsignado != null ? $"{c.ProfesorAsignado.Nombre} {c.ProfesorAsignado.Apellido}" : "Sin asignar";
+                Console.WriteLine($"  {c.Codigo}  {c.Nombre}  ({c.Creditos} créditos)  | Profesor: {prof}");
+            }
+
+            // Estudiantes (muestra los primeros 15 puestos para no saturar)
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nESTUDIANTES (primeros 15)");
+            Console.ResetColor();
+
+            var ests = repoEstudiantes.ObtenerTodos();
+            if (ests.Count == 0) Console.WriteLine("  (sin estudiantes)");
+            foreach (var e in ests.Take(15))
+                Console.WriteLine($"  {e.Identificacion}  {e.Nombre} {e.Apellido}  | {e.Carrera}  | Matrícula: {e.NumeroMatricula}");
+
+            // Resumen de matrículas y promedios
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nRESUMEN");
+            Console.ResetColor();
+
+            Console.WriteLine($"  Total Estudiantes : {repoEstudiantes.Contar()}");
+            Console.WriteLine($"  Total Profesores  : {repoProfesores.Contar()}");
+            Console.WriteLine($"  Total Cursos      : {repoCursos.Contar()}");
+
+            var promedio = gestorMatriculas.ObtenerPromedioGeneral();
+            Console.WriteLine($"  Promedio General  : {promedio:F2}");
+
+            var enRiesgo = gestorMatriculas.ObtenerEstudiantesEnRiesgo().Count;
+            Console.WriteLine($"  Estudiantes en riesgo (<7.0): {enRiesgo}");
+        }
+
+
+
+
 
         // ====== Utilidades UI ======
         private static int LeerOpcion() => int.TryParse(Console.ReadLine(), out int x) ? x : 0;
@@ -76,7 +168,7 @@ namespace SistemaUniversitario.Presentacion
 ║                                                          ║
 ║        SISTEMA DE GESTIÓN UNIVERSITARIA                  ║
 ║                                                          ║
-║        Práctica de C# - POO Avanzado                     ║
+║                 Práctica de C#                           ║
 ║                                                          ║
 ╚══════════════════════════════════════════════════════════╝");
             Console.ResetColor();
@@ -441,7 +533,28 @@ namespace SistemaUniversitario.Presentacion
         private void DemostrarFuncionalidades()
         {
             Console.Clear();
-            generadorDatos.DemostrarFuncionalidades(repoEstudiantes, repoProfesores, repoCursos, gestorMatriculas);
+
+            // 1) Demo de negocio/estadísticas (ya la tienes en GeneradorDatos)
+            generadorDatos.DemostrarFuncionalidades(
+                repoEstudiantes, repoProfesores, repoCursos, gestorMatriculas);
+
+            // 2) —— REQUISITO 7: Conversiones + Boxing/Unboxing ——
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n--- DEMO: Conversiones y Boxing/Unboxing ---");
+            Console.ResetColor();
+
+            var util = new MultiConversiones();
+
+            // Boxing/Unboxing demostrativo
+            util.DemostrarBoxingUnboxing();
+
+            // Conversión de varios tipos
+            Console.WriteLine("\n--- Conversión de datos variados ---");
+            object[] datos = { 42, 3.14159, "Hola Mundo", DateTime.Now, true, 9.5m };
+            foreach (var d in datos)
+                Console.WriteLine($"  {util.ConvertirDatos(d)}");
+
+            Console.WriteLine("\n(Fin de la demostración de conversiones)\n");
         }
     }
 }

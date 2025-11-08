@@ -5,15 +5,12 @@ using SistemaUniversitario.Dominio.Entidades;
 using SistemaUniversitario.Dominio.Enums;
 
 
-
-
-
 namespace SistemaUniversitario.Dominio.Entidades
 {
-    /// <summary>
+  
     /// Clase base abstracta para todas las personas del sistema (Estudiante, Profesor).
     /// Contiene propiedades comunes y validaciones básicas.
-    /// </summary>
+   
     public abstract class Persona : IIdentificable
     {
         private string identificacion = "";

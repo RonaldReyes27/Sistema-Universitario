@@ -3,17 +3,18 @@ using System.Collections.Generic;
 
 namespace Sistema_Universitario.Aplicacion.Utils
 {
-    /// <summary>
+    
     /// Clase que contiene métodos de conversión de tipos, 
     /// parsing de datos y demostración de boxing/unboxing.
-    /// </summary>
+    
     public class MultiConversiones
     {
-        /// <summary>
+        
         /// Convierte distintos tipos de datos a una representación textual amigable.
-        /// </summary>
+        
         /// <param name="dato">Cualquier objeto (valor o referencia).</param>
         /// <returns>Texto descriptivo según el tipo detectado.</returns>
+        
         public string ConvertirDatos(object dato)
         {
             return dato switch
@@ -28,18 +29,18 @@ namespace Sistema_Universitario.Aplicacion.Utils
             };
         }
 
-        /// <summary>
+        
         /// Intenta analizar un texto como calificación numérica (0-10).
-        /// </summary>
+        
         public bool ParsearCalificacion(string entrada, out decimal calificacion)
         {
             return decimal.TryParse(entrada, out calificacion) &&
                    calificacion >= 0 && calificacion <= 10;
         }
 
-        /// <summary>
+        
         /// Demuestra el funcionamiento del Boxing y Unboxing en C#.
-        /// </summary>
+      
         public void DemostrarBoxingUnboxing()
         {
             Console.WriteLine("\n=== Demostración de Boxing/Unboxing ===");

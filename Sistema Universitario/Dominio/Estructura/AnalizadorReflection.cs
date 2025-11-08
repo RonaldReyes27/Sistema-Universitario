@@ -5,15 +5,15 @@ using SistemaUniversitario.Estructura;
 
 namespace SistemaUniversitario.Estructura
 {
-    /// <summary>
+    
     /// Clase que utiliza Reflection para analizar tipos, crear instancias
     /// e invocar métodos de manera dinámica en tiempo de ejecución.
-    /// </summary>
+    
     public class AnalizadorReflection
     {
-        /// <summary>
+       
         /// Muestra en consola las propiedades públicas de un tipo.
-        /// </summary>
+       
         public void MostrarPropiedades(Type tipo)
         {
             Console.WriteLine($"\n=== Propiedades de {tipo.Name} ===");
@@ -23,9 +23,8 @@ namespace SistemaUniversitario.Estructura
                 Console.WriteLine($"  - {prop.Name} ({prop.PropertyType.Name})");
         }
 
-        /// <summary>
         /// Muestra los métodos públicos declarados en un tipo.
-        /// </summary>
+        
         public void MostrarMetodos(Type tipo)
         {
             Console.WriteLine($"\n=== Métodos de {tipo.Name} ===");
@@ -39,9 +38,9 @@ namespace SistemaUniversitario.Estructura
             }
         }
 
-        /// <summary>
+        
         /// Crea dinámicamente una instancia de un tipo con parámetros opcionales.
-        /// </summary>
+       
         public object? CrearInstanciaDinamica(Type tipo, params object[] parametros)
         {
             try
@@ -57,9 +56,9 @@ namespace SistemaUniversitario.Estructura
             }
         }
 
-        /// <summary>
+        
         /// Invoca un método de una instancia usando su nombre y parámetros.
-        /// </summary>
+        
         public object? InvocarMetodo(object instancia, string nombreMetodo, params object[] parametros)
         {
             try

@@ -7,15 +7,15 @@ using SistemaUniversitario.Dominio.Enums;
 
 namespace SistemaUniversitario.Dominio.Entidades
 {
-    /// <summary>
-    /// Representa un curso académico dentro del sistema universitario.
-    /// Incluye código, nombre, créditos y el profesor asignado.
-    /// </summary>
+
     public class Curso : IIdentificable
     {
+        // Campos privados
         private string codigo = "";
         private string nombre = "";
 
+        //Propiedad: Código del curso
+        // Obligatoria, no puede estar vacía.
         [Requerido]
         public string Codigo
         {
@@ -29,8 +29,13 @@ namespace SistemaUniversitario.Dominio.Entidades
         }
 
         // Implementación de la interfaz IIdentificable
+        // Retorna el código como identificador único.
         string IIdentificable.Identificacion => Codigo;
 
+
+
+        // Propiedad: Nombre del curso
+        // También es obligatoria.
         [Requerido]
         public string Nombre
         {
@@ -42,7 +47,8 @@ namespace SistemaUniversitario.Dominio.Entidades
                 nombre = value;
             }
         }
-
+        // Propiedad: Créditos del curso
+        // Debe estar en el rango de 1 a 6.
         [ValidacionRango(1, 6)]
         public int Creditos { get; set; }
 
@@ -53,6 +59,7 @@ namespace SistemaUniversitario.Dominio.Entidades
         public Curso() { }
 
         // Constructor completo
+        // Permite crear el curso con todos los datos necesarios.
         public Curso(string codigo, string nombre, int creditos, Profesor? profesor = null)
         {
             Codigo = codigo;
@@ -62,6 +69,7 @@ namespace SistemaUniversitario.Dominio.Entidades
         }
 
         // Representación textual del curso
+        // Devuelve una descripción legible del curso con su profesor.
         public override string ToString()
         {
             var prof = ProfesorAsignado != null

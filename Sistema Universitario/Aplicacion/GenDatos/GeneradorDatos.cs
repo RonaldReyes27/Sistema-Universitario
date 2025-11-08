@@ -9,18 +9,18 @@ using SistemaUniversitario.Dominio.Enums;
 
 namespace SistemaUniversitario.Aplicacion.GenDatos
 {
-    /// <summary>
+
     /// Genera datos de prueba (profesores, estudiantes, cursos y matrículas)
     /// para demostrar las funcionalidades del sistema.
-    /// </summary>
+    
     public class GeneradorDatos
     {
         private static readonly Random random = new();
 
-        /// <summary>
+       
         /// Crea datos simulados de profesores, cursos y estudiantes,
         /// y luego matricula automáticamente a los estudiantes.
-        /// </summary>
+      
         public void GenerarDatosPrueba(
             Repositorio<Estudiante> repoEstudiantes,
             Repositorio<Profesor> repoProfesores,
@@ -32,10 +32,10 @@ namespace SistemaUniversitario.Aplicacion.GenDatos
             // ========== Profesores ==========
             var profesores = new List<Profesor>
             {
-                new("P001", "Carlos", "Martínez", new DateTime(1980, 5, 15), "Ingeniería", TipoContrato.TiempoCompleto, 3500),
-                new("P002", "María", "González", new DateTime(1985, 8, 22), "Ciencias", TipoContrato.TiempoCompleto, 3200),
-                new("P003", "Juan", "Rodríguez", new DateTime(1978, 3, 10), "Matemáticas", TipoContrato.TiempoCompleto, 3800),
-                new("P004", "Ana", "López", new DateTime(1982, 11, 5), "Sistemas", TipoContrato.MedioTiempo, 2000),
+                new("P001", "Ivan", "Zorrilla", new DateTime(1980, 5, 15), "Ingeniería", TipoContrato.TiempoCompleto, 3500),
+                new("P002", "Jose", "Luis", new DateTime(1985, 8, 22), "Ciencias", TipoContrato.TiempoCompleto, 3200),
+                new("P003", "Edwin", "Fria", new DateTime(1978, 3, 10), "Matemáticas", TipoContrato.TiempoCompleto, 3800),
+                new("P004", "Victor", "Rijo", new DateTime(1982, 11, 5), "Sistemas", TipoContrato.MedioTiempo, 2000),
                 new("P005", "Pedro", "Sánchez", new DateTime(1975, 7, 18), "Negocios", TipoContrato.TiempoCompleto, 4000)
             };
 
@@ -59,8 +59,8 @@ namespace SistemaUniversitario.Aplicacion.GenDatos
             cursos.ForEach(repoCursos.Agregar);
 
             // ========== Estudiantes ==========
-            string[] carreras = { "Ingeniería en Sistemas", "Ingeniería Industrial", "Administración", "Contabilidad" };
-            string[] nombres = { "Luis", "Carmen", "Roberto", "Patricia", "Diego", "Laura", "Miguel", "Sofía", "Fernando", "Valeria", "Andrés", "Gabriela", "Ricardo", "Mónica", "Javier" };
+            string[] carreras = { "Ingeniería en Software", "Ingeniería Industrial", "Administración", "Contabilidad" };
+            string[] nombres = { "Luis", "Elian", "Tomas", "Ramon", "Dubenny", "Neiry", "Joseidi", "Jeifferson", "Braylin", "Angel", "Andrea", "Ronald", "Ricardo", "Mónica", "Javier" };
             string[] apellidos = { "García", "Pérez", "Ramírez", "Torres", "Flores", "Rivera", "Gómez", "Díaz", "Cruz", "Morales", "Jiménez", "Hernández", "Ruiz", "Mendoza", "Castro" };
 
             for (int i = 0; i < 15; i++)
@@ -116,9 +116,9 @@ namespace SistemaUniversitario.Aplicacion.GenDatos
             Console.WriteLine("¡Datos de prueba generados exitosamente!\n");
         }
 
-        /// <summary>
+        
         /// Ejecuta una demostración completa del sistema mostrando datos, promedios y análisis.
-        /// </summary>
+        
         public void DemostrarFuncionalidades(
             Repositorio<Estudiante> repoEstudiantes,
             Repositorio<Profesor> repoProfesores,
